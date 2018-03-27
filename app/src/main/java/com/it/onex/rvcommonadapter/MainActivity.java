@@ -43,6 +43,8 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+//TODO rxbus base on Rxjava2 implements
 public class MainActivity extends AppCompatActivity {
 
     List<String> mData = Arrays.asList(Cheeses.NAMES);
@@ -85,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 btnAmRxbindIng.setText(charSequence.toString());
             }
         });
+
+
+
+
 
         RxTextView.textChanges(etAmTest)
                 .debounce(5000, TimeUnit.MILLISECONDS)
