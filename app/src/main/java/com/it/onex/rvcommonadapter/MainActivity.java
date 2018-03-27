@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.it.onex.GetRequest_Interface;
@@ -16,8 +19,12 @@ import com.it.onex.Translation2;
 import com.it.onex.rvcommonadapter.base.CommonAdapter;
 import com.it.onex.rvcommonadapter.base.ViewHolder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxCompoundButton;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,25 +45,91 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<String> mDatas = Arrays.asList(Cheeses.NAMES);
+    List<String> mData = Arrays.asList(Cheeses.NAMES);
+    ArrayList<String> mDatas=new ArrayList<>(mData);
     private String TAG = "Main";
+    private CommonAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnAmRxbindIng = findViewById(R.id.btn_am_rxbinding);
+        final Button btnAmRxbindIng = findViewById(R.id.btn_am_rxbinding);
+        EditText etAmTest = findViewById(R.id.et_am_test);
+        SearchView searchView = findViewById(R.id.sv_am);
+
+        CheckBox checkBox =  findViewById(R.id.cb_am);
+
+        RxCompoundButton.checkedChanges(checkBox).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                btnAmRxbindIng.setEnabled(aBoolean);
+                btnAmRxbindIng.setBackgroundColor(aBoolean? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
+            }
+        });
+
+        RxView.clicks(btnAmRxbindIng).throttleFirst(2,TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Toast.makeText(MainActivity.this, "fuck!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        //查看文本相关的变化
+        RxTextView.textChanges(etAmTest).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<CharSequence>() {
+            @Override
+            public void accept(CharSequence charSequence) throws Exception {
+                btnAmRxbindIng.setText(charSequence.toString());
+            }
+        });
+
+        RxTextView.textChanges(etAmTest)
+                .debounce(5000, TimeUnit.MILLISECONDS)
+                .map(new Function<CharSequence, String>() {
+                    @Override
+                    public String apply(CharSequence charSequence) throws Exception {
 
 
-//        RxView.clicks(btnAmRxbindIng).throttleFirst(2, TimeUnit.SECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<Void>() {
-//                    @Override
-//                    public void call(Void aVoid) {
-//
-//                    }
-//                });
+                        return charSequence.toString();
+                    }
+                }).observeOn(Schedulers.io())
+                .map(new Function<String, List<String>>() {
+                    @Override
+                    public List<String> apply(String s) throws Exception {
+                        ArrayList<String> list=new ArrayList<>();
+                        if (mDatas.contains(s)){
+                            list.add(s);
+                            return list;
+                        }else {
+                            return mDatas;
+                        }
+                        
+                    
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> strings) throws Exception {
+                        if (strings.size()==1) {
+                            mDatas.add(0,strings.get(0));
+                            if (adapter != null) {
+                                adapter.notifyDataSetChanged();
+                            }
+                            Toast.makeText(MainActivity.this, "检索到：" + strings.get(0) +"已添加到第一项 " , Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "not find anything!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+
+        //how to use rxbinding implements the searchView
+
+
 
 
         //
@@ -71,14 +144,14 @@ public class MainActivity extends AppCompatActivity {
 //        getZip();
 
 
-        getContentCache();
+//        getContentCache();
 
         RecyclerView recyclerView = findViewById(R.id.rv_am);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
-        recyclerView.setAdapter(new CommonAdapter<String>(this, R.layout.item, mDatas) {
+        adapter = new CommonAdapter<String>(this, R.layout.item, mDatas) {
 
             @Override
             public void convert(ViewHolder holder, String s, final int position) {
@@ -91,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        };
+        recyclerView.setAdapter(adapter);
 
 
     }

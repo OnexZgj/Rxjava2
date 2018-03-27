@@ -15,14 +15,30 @@
             android:id="@+id/btn_am_rxbinding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test RxBinding"/>
+            android:text="Test RxBinding" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_am"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </android.support.v7.widget.RecyclerView>
+        <EditText
+            android:id="@+id/et_am_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="please input the number"/>
+
+        <CheckBox
+            android:id="@+id/cb_am"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/sv_am"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_am"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 
