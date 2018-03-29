@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.it.onex.rvcommonadapter.ARouter1Activity">
+
+
+    <TextView
+        android:layout_margin="5dp"
+        android:id="@+id/tv_show"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#888888"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="Arouter_Activity1"/>
+
+
+    <Button
+        android:layout_margin="5dp"
+        android:id="@+id/btn_aa_intent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:text="跳转到ARouter2Activity"/>
+
+</LinearLayout>

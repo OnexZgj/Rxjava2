@@ -1,5 +1,6 @@
 package com.it.onex.rvcommonadapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class TestRxLifeActivity extends RxAppCompatActivity {
     private static final String TAG = "TestRxLifeActivity";
     private TextView textView;
     private Button btnAtrlDis;
+    private Button btnAtrlARouter;
     private Disposable subscribe;
 
     @Override
@@ -34,6 +36,7 @@ public class TestRxLifeActivity extends RxAppCompatActivity {
 
         textView = findViewById(R.id.tv_atrl_show);
         btnAtrlDis = findViewById(R.id.btn_atrl_dis);
+        btnAtrlARouter = findViewById(R.id.btn_atrl_arouter);
 
 
         RxView.clicks(btnAtrlDis).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Object>() {
@@ -44,6 +47,13 @@ public class TestRxLifeActivity extends RxAppCompatActivity {
                     subscribe.dispose();
                 }
 
+            }
+        });
+
+        RxView.clicks(btnAtrlARouter).subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
+                startActivity(new Intent(TestRxLifeActivity.this,ARouter1Activity.class));
             }
         });
 

@@ -28,4 +28,14 @@
         android:textColor="#ffffff" />
 
 
+    <Button
+        android:id="@+id/btn_atrl_arouter"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="ARouter Test"
+        android:textColor="#ffffff" />
+
+
 </LinearLayout>

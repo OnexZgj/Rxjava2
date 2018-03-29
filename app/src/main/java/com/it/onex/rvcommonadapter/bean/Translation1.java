@@ -1,13 +1,13 @@
-package com.it.onex;
+package com.it.onex.rvcommonadapter.bean;
 
 import java.util.List;
 
 /**
  * Created by Linsa on 2018/3/26:10:47.
- * des:
+ * des: 有道词典进行
  */
 
-public class Translation2 {
+public class Translation1 {
 
     /**
      * status : 0

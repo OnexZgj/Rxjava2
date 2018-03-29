@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.it.onex.rvcommonadapter.bean.Cheeses;
 import com.it.onex.rvcommonadapter.bean.Translation;
 import com.it.onex.rvcommonadapter.bean.Translation1;
 import com.it.onex.rvcommonadapter.bean.Translation2;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.it.onex.rvcommonadapter;
+package com.it.onex.rvcommonadapter.bean;
 
 public interface Cheeses {
 	
