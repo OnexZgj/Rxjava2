@@ -1,5 +1,9 @@
-package com.it.onex;
+package com.it.onex.rvcommonadapter;
 
+
+import com.it.onex.rvcommonadapter.bean.Translation;
+import com.it.onex.rvcommonadapter.bean.Translation1;
+import com.it.onex.rvcommonadapter.bean.Translation2;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

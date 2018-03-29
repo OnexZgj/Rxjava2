@@ -1,4 +1,4 @@
-package com.it.onex;
+package com.it.onex.rvcommonadapter.bean;
 
 import java.util.List;
 

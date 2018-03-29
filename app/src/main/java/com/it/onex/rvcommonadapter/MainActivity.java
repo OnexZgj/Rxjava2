@@ -1,5 +1,6 @@
 package com.it.onex.rvcommonadapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,10 +13,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.it.onex.GetRequest_Interface;
-import com.it.onex.Translation;
-import com.it.onex.Translation1;
-import com.it.onex.Translation2;
+import com.it.onex.rvcommonadapter.bean.Translation;
+import com.it.onex.rvcommonadapter.bean.Translation1;
+import com.it.onex.rvcommonadapter.bean.Translation2;
 import com.it.onex.rvcommonadapter.base.CommonAdapter;
 import com.it.onex.rvcommonadapter.base.ViewHolder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -76,8 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        Toast.makeText(MainActivity.this, "fuck!", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(MainActivity.this,TestRxLifeActivity.class));
                     }
+
                 });
 
         //查看文本相关的变化
