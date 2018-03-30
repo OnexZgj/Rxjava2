@@ -18,9 +18,11 @@ public class URLReceiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urlreceive);
 
+
         //对URI 数据分发
         Uri uri = getIntent().getData();
-        ARouter.getInstance().build(uri).navigation(this, new NavCallback() {
+        ARouter.getInstance().build(uri)
+                .navigation(this, new NavCallback() {
             @Override
             public void onArrival(Postcard postcard) {
                 finish();
