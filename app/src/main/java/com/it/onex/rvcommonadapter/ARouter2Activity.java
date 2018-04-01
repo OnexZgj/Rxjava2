@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.it.onex.rvcommonadapter.bean.Man;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,15 +18,20 @@ import butterknife.OnClick;
 @Route(path = "/com/ARouter2Activity")
 public class ARouter2Activity extends AppCompatActivity {
 
+
     @Autowired
     public String name;
     @Autowired
     int age;
+    @Autowired
+    Man obj;
 
     @BindView(R.id.tv_show2)
     TextView tvShow2;
     @BindView(R.id.btn_aa_intent2)
     Button btnAaIntent2;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class ARouter2Activity extends AppCompatActivity {
         ARouter.getInstance().inject(this);
 
 
-        tvShow2.setText("name :" +name +", age : "+age);
+        tvShow2.setText("name :" +name +", age : "+age + "obj : "+obj.toString());
 
     }
 

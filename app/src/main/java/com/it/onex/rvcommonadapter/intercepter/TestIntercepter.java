@@ -32,6 +32,12 @@ public class TestIntercepter implements IInterceptor {
 //            callback.onInterrupt(null);
             Log.e("onex", "process: 不拦截" );
 
+            if (postcard.getPath().equals("/com/ARouter2Activity")){
+                //拦截
+            }else{
+                //不拦截
+            }
+
             postcard.withString("extra", "我是在拦截器中附加的参数");
             callback.onContinue(postcard);
 

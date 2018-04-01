@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.it.onex.rvcommonadapter.bean.Man;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,13 +35,17 @@ public class ARouter1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arouter1);
         ButterKnife.bind(this);
+
     }
 
     @OnClick({R.id.btn_aa_intent})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_aa_intent:
+
+                Man man = new Man("OneX","男");
                 ARouter.getInstance().build("/com/ARouter2Activity")
+                        .withObject("obj",man)
                         .withString("name","onex")
                         .withInt("age",21)
                         .navigation(this, new NavigationCallback() {
